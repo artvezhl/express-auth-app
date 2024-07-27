@@ -2,5 +2,6 @@
 
 ## Express Authentication App
 
-### How to run?
-- use `npm start`
+### How to start App?
+- install all App dependencies - `npm install`
+- run App - `npm start`
