@@ -1,11 +1,21 @@
 import express from "express";
+import { validateEnv } from "./utils";
+import { errorMiddleware } from "./middlewares";
+
+const auth = require("./routers/auth");
+
+validateEnv();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT ?? 8000;
 
-app.get("/", (req, res) => {
-  res.send("Hello, Express!");
-});
+app.use(express.json());
+
+//calling Database function
+require("./config/db").connect();
+
+app.use("/api/v1/auth", auth);
+app.use(errorMiddleware);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
